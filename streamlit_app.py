@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 #LLM
 from langchain.llms import OpenAI
@@ -12,10 +13,10 @@ st.set_page_config(page_title="Understood.AI")
 
 #Import API keys
 #Set API keys
-openai_api_key = st.sidebar.text_input('OpenAI API Key')
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
 #Set OpenAI as llm
-llm = OpenAI(temperature = 0.9, openai_api_key = openai_api_key)
+llm = OpenAI(temperature = 0.9)
 
 
 #Prompt Engine
@@ -69,9 +70,10 @@ st.subheader('Understood AI is a Generative MindsAI tool designed to help neurod
 with st.form('my_form'):
     email = st.text_area('Copy in an email you have received and Understood AI will help you to understand what it means')
     submitted = st.form_submit_button('Submit')
-    if not openai_api_key.startswith('sk-') :
-        st.warning('Please enter your OpenAI API key!', icon='⚠')
-    if submitted and openai_api_key.startswith('sk-'):
+    # if not openai_api_key.startswith('sk-') :
+    #     st.warning('Please enter your OpenAI API key!', icon='⚠')
+    if submitted:
+        # and openai_api_key.startswith('sk-'):
         understood = sequential_chain(email)
         st.subheader("Here's a brief summary of the email:")
         st.write(understood['summary'])
