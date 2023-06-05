@@ -69,7 +69,7 @@ st.subheader('Understood AI is a Generative MindsAI tool designed to help neurod
 with st.form('my_form'):
     email = st.text_area('Copy in an email you have received and Understood AI will help you to understand what it means')
     submitted = st.form_submit_button('Submit')
-    if not test and not openai_api_key.startswith('sk-') :
+    if not openai_api_key.startswith('sk-') :
         st.warning('Please enter your OpenAI API key!', icon='⚠')
     if submitted and openai_api_key.startswith('sk-'):
         understood = sequential_chain(email)
