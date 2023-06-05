@@ -1,4 +1,5 @@
 import streamlit as st
+
 #LLM
 from langchain.llms import OpenAI
 
@@ -9,13 +10,9 @@ from langchain.chains import LLMChain, SequentialChain
 #PageConfig
 st.set_page_config(page_title="Understood.AI")
 
-#Test Conditions
-test = False
-
 #Import API keys
 #Set API keys
 openai_api_key = st.sidebar.text_input('OpenAI API Key')
-
 
 #Set OpenAI as llm
 llm = OpenAI(temperature = 0.9, openai_api_key = openai_api_key)
